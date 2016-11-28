@@ -1,0 +1,16 @@
+﻿@model DateTime?
+@{
+    var options = ViewData.Where(m => m.Key.StartsWith("_"));
+}
+@if (Model.HasValue)
+{
+    @Html.TextBoxFor(m => m.Value.Year) @:/
+    @Html.TextBoxFor(m => m.Value.Month) @:/
+    @Html.TextBoxFor(m => m.Value.Day)
+}
+else
+{
+    @Html.TextBox("Year") @:/
+    @Html.TextBox("Month") @:/
+    @Html.TextBox("Day")
+}
