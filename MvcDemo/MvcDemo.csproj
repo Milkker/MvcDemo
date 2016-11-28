@@ -163,6 +163,7 @@
     <Compile Include="Areas\LEV\Controllers\APL01Controller.cs" />
     <Compile Include="Areas\LEV\LEVAreaRegistration.cs" />
     <Compile Include="Areas\MSG\Controllers\APL01Controller.cs" />
+    <Compile Include="Areas\MSG\Models\MessageMasterVM.cs" />
     <Compile Include="Areas\MSG\MSGAreaRegistration.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -236,6 +237,9 @@
       <DependentUpon>MvcDemo.edmx</DependentUpon>
     </Content>
     <Content Include="Areas\MSG\Views\APL01\Index.cshtml" />
+    <Content Include="Areas\MSG\Views\APL01\Detail.cshtml" />
+    <Content Include="Areas\MSG\Views\APL01\Insert.cshtml" />
+    <Content Include="Areas\MSG\Views\_ViewStart.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -291,7 +295,6 @@
     <Folder Include="App_Data\" />
     <Folder Include="Areas\LEV\Models\" />
     <Folder Include="Areas\LEV\Views\Shared\" />
-    <Folder Include="Areas\MSG\Models\" />
     <Folder Include="Areas\MSG\Views\Shared\" />
   </ItemGroup>
   <ItemGroup>

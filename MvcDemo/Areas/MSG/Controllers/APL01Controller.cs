@@ -6,6 +6,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using System.Data.Entity;
+using MvcDemo.Areas.MSG.Models;
 
 namespace MvcDemo.Areas.MSG.Controllers
 {
@@ -15,6 +16,93 @@ namespace MvcDemo.Areas.MSG.Controllers
 
         // GET: MSG/APL01
         public ActionResult Index()
+        {
+            IQueryable<MessageMasterVM> query = sqlDb.MSGD01_1.Select(m => new MessageMasterVM
+            {
+                Aplno = m.MD0101_APLNO,
+                SenderName = m.MD0101_SENDERNAME,
+                Title = m.MD0101_TITLE,
+                IsAllMember = m.MD0101_ALLMEMBER ?? false,
+            });
+
+            return View(query);
+        }
+
+        public ActionResult Insert()
+        {
+            MessageMasterVM model = new MessageMasterVM();
+
+            return View(model);
+        }
+
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Insert(MessageMasterVM model)
+        {
+            if (!ModelState.IsValid)
+                return View(model);
+
+            //Update Db
+            try
+            {
+                var dbModel = sqlDb.MSGD01_1.Create();
+
+                dbModel.MD0101_APLNO = model.Aplno;
+                dbModel.MD0101_SENDERNAME = model.SenderName;
+                dbModel.MD0101_TITLE = model.Title;
+                dbModel.MD0101_ALLMEMBER = model.IsAllMember;
+
+                sqlDb.MSGD01_1.Add(dbModel);
+                sqlDb.SaveChanges();
+
+                ModelState.AddModelError("", "新增成功");
+
+                return View(model);
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex.Message);
+
+                ModelState.AddModelError("", "發生例外事件(" + ex.Message + ")");
+
+                return View(model);
+            }
+        }
+
+        [HttpPost]
+        public ActionResult Delete(string aplno)
+        {
+            //Update Db
+            try
+            {
+                var dbModel = sqlDb.MSGD01_1.FirstOrDefault(m => m.MD0101_APLNO == aplno);
+
+                sqlDb.MSGD01_1.Remove(dbModel);
+                sqlDb.SaveChanges();
+
+                return Json(new
+                {
+                    Success = true,
+                    Message = "刪除成功"
+                });
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex.Message);
+
+                return Json(new
+                {
+                    Success = false,
+                    Message = "發生例外事件(" + ex.Message + ")"
+                });
+            }
+        }
+
+        /// <summary>
+        /// Linq 練習1
+        /// </summary>
+        private void LinqPractice()
         {
             //select * from MSGD01_1 where MD0101_APLNO='105B1000000001'
             /*
@@ -51,8 +139,59 @@ namespace MvcDemo.Areas.MSG.Controllers
 
             foreach (var item in query2)
                 Debug.WriteLine(item.MD0101_SENDERNAME);
+        }
 
-            return View();
+        public ActionResult Detail(string aplno)
+        {
+            var query = sqlDb.MSGD01_1.Where(m => m.MD0101_APLNO == aplno);
+
+            if (!query.Any())
+                return HttpNotFound();
+
+            var firstData = query.FirstOrDefault();
+
+            //DB to ViewModel
+            MessageMasterVM model = new MessageMasterVM();
+
+            model.Aplno = firstData.MD0101_APLNO;
+            model.SenderName = firstData.MD0101_SENDERNAME;
+            model.Title = firstData.MD0101_TITLE;
+            model.IsAllMember = firstData.MD0101_ALLMEMBER ?? false;
+
+            return View(model);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Detail(MessageMasterVM model)
+        {
+            if (!ModelState.IsValid)
+                return View(model);
+
+            //Update Db
+            try
+            {
+                var dbModel = sqlDb.MSGD01_1.FirstOrDefault(m => m.MD0101_APLNO == model.Aplno);
+
+                dbModel.MD0101_SENDERNAME = model.SenderName;
+                dbModel.MD0101_TITLE = model.Title;
+                dbModel.MD0101_ALLMEMBER = model.IsAllMember;
+
+                sqlDb.SaveChanges();
+
+                ModelState.AddModelError("", "修改成功");
+
+                return View(model);
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex.Message);
+
+                ModelState.AddModelError("", "發生例外事件(" + ex.Message + ")");
+
+                return View(model);
+            }
+
         }
     }
 }

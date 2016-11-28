@@ -5,25 +5,23 @@ using System.Web;
 
 namespace MvcDemo.Areas.MSG.Models
 {
+    /// <summary>
+    /// 公務訊息主檔
+    /// </summary>
     public class MessageMasterVM
     {
         /// <summary>
-        /// 申請單號
+        /// *申請單號(14)
         /// </summary>
         public string  Aplno { get; set; }
 
         /// <summary>
-        /// 發送人員
-        /// </summary>
-        public string SenderGuid { get; set; }
-
-        /// <summary>
-        /// 發送人員名稱
+        /// *發送人員名稱(4個字)
         /// </summary>
         public string SenderName { get; set; }
 
         /// <summary>
-        /// 主旨
+        /// *主旨(500/TextArea)
         /// </summary>
         public string Title { get; set; }
 

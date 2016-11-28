@@ -1,1 +1,56 @@
-﻿
+﻿@using MvcDemo.Areas.MSG.Models
+@model IEnumerable<MessageMasterVM>
+@section heads{
+    <style>
+        .deleteLink {
+            color: red;
+        }
+    </style>
+}
+<a href="@Url.Action("Insert")">新增</a>
+<table>
+    <thead>
+        <tr>
+            <th>@Html.DisplayNameFor(m => m.FirstOrDefault().Aplno)</th>
+            <th>@Html.DisplayNameFor(m => m.FirstOrDefault().SenderName)</th>
+            <th>@Html.DisplayNameFor(m => m.FirstOrDefault().Title)</th>
+            <th>@Html.DisplayNameFor(m => m.FirstOrDefault().IsAllMember)</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (Model != null && Model.Any())
+        {
+            foreach (var messageMaster in Model)
+            {
+                <tr>
+                    <td>
+                        <a href="@Url.Action("Detail", new { aplno = messageMaster.Aplno})">@messageMaster.Aplno</a>
+                    </td>
+                    <td>@messageMaster.SenderName</td>
+                    <td>@messageMaster.Title</td>
+                    <td>@(messageMaster.IsAllMember ? "是" : "否")</td>
+                    <td>
+                        <a href="#" class="deleteLink" data-aplno="@messageMaster.Aplno">刪除鈕</a>
+                    </td>
+                </tr>
+            }
+        }
+    </tbody>
+</table>
+@section scripts{
+    <script>
+        $(function () {
+            $(".deleteLink").click(function () {
+                var aplno = $(this).data("aplno");
+                $.post("@Url.Action("Delete")", {
+                    aplno: aplno
+                }, function (data) {
+                    if (data.Success)
+                        location.reload();
+                    alert(data.Message);
+                });
+            });
+        });
+    </script>
+}
