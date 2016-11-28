@@ -1,0 +1,460 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="twd_demoModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="MSGD01_1">
+          <Key>
+            <PropertyRef Name="MD0101_APLNO" />
+          </Key>
+          <Property Name="MD0101_APLNO" Type="char" MaxLength="14" Nullable="false" />
+          <Property Name="MD0101_TYPE" Type="char" MaxLength="2" />
+          <Property Name="MD0101_SENDER" Type="char" MaxLength="36" />
+          <Property Name="MD0101_SENDERNAME" Type="nvarchar" MaxLength="20" />
+          <Property Name="MD0101_SENDERDEPT" Type="varchar" MaxLength="10" />
+          <Property Name="MD0101_SENDERDEPTNAME" Type="nvarchar" MaxLength="50" />
+          <Property Name="MD0101_SENDERTITLE" Type="varchar" MaxLength="10" />
+          <Property Name="MD0101_SENDERTITLENAME" Type="nvarchar" MaxLength="20" />
+          <Property Name="MD0101_SENDDATE" Type="datetime" />
+          <Property Name="MD0101_ISSEND" Type="bit" />
+          <Property Name="MD0101_ALLMEMBER" Type="bit" />
+          <Property Name="MD0101_TITLE" Type="nvarchar" MaxLength="200" />
+          <Property Name="MD0101_CONTENT" Type="ntext" />
+          <Property Name="MD0101_LIMITBEGINDATE" Type="int" />
+          <Property Name="MD0101_LIMITENDDATE" Type="int" />
+          <Property Name="MD0101_UPDDATE" Type="datetime" />
+          <Property Name="MD0101_UPDUSER" Type="char" MaxLength="36" />
+        </EntityType>
+        <EntityType Name="MSGD01_2">
+          <Key>
+            <PropertyRef Name="MD0102_ID" />
+          </Key>
+          <Property Name="MD0102_ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="MD0102_APLNO" Type="char" MaxLength="14" />
+          <Property Name="MD0102_TYPE" Type="char" MaxLength="1" />
+          <Property Name="MD0102_SOURCEID" Type="bigint" />
+          <Property Name="MD0102_SENDTYPE" Type="char" MaxLength="1" />
+          <Property Name="MD0102_RECDEPT" Type="varchar" MaxLength="10" />
+          <Property Name="MD0102_RECUSER" Type="char" MaxLength="36" />
+          <Property Name="MD0102_UNDERTAKER" Type="char" MaxLength="36" />
+          <Property Name="MD0102_UNDERTAKERNAME" Type="nvarchar" MaxLength="20" />
+          <Property Name="MD0102_UNDERTAKERDEPT" Type="varchar" MaxLength="10" />
+          <Property Name="MD0102_UNDERTAKERDEPTNAME" Type="nvarchar" MaxLength="50" />
+          <Property Name="MD0102_UNDERTAKERTITLE" Type="varchar" MaxLength="10" />
+          <Property Name="MD0102_UNDERTAKERTITLENAME" Type="nvarchar" MaxLength="20" />
+          <Property Name="MD0102_READTYPE" Type="bit" />
+          <Property Name="MD0102_COMPLETETYPE" Type="bit" />
+          <Property Name="MD0102_COMPLETEDATE" Type="datetime" />
+          <Property Name="MD0102_UPDDATE" Type="datetime" />
+          <Property Name="MD0102_UPDUSER" Type="char" MaxLength="36" />
+        </EntityType>
+        <EntityType Name="MSGD01_3">
+          <Key>
+            <PropertyRef Name="MD0103_ID" />
+          </Key>
+          <Property Name="MD0103_ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="MD0103_MD0102_ID" Type="bigint" />
+          <Property Name="MD0103_APLNO" Type="char" MaxLength="14" />
+          <Property Name="MD0103_TYPE" Type="char" MaxLength="2" />
+          <Property Name="MD0103_REPLYDATE" Type="datetime" />
+          <Property Name="MD0103_REPLY" Type="char" MaxLength="36" />
+          <Property Name="MD0103_REPLYNAME" Type="nvarchar" MaxLength="20" />
+          <Property Name="MD0103_REPLYDEPT" Type="varchar" MaxLength="10" />
+          <Property Name="MD0103_REPLYDEPTNAME" Type="nvarchar" MaxLength="50" />
+          <Property Name="MD0103_REPLYTITLE" Type="varchar" MaxLength="10" />
+          <Property Name="MD0103_REPLYTITLENAME" Type="nvarchar" MaxLength="20" />
+          <Property Name="MD0103_CONTENT" Type="ntext" />
+          <Property Name="MD0103_UPDDATE" Type="datetime" />
+          <Property Name="MD0103_UPDUSER" Type="char" MaxLength="36" />
+        </EntityType>
+        <EntityType Name="MSGM01">
+          <Key>
+            <PropertyRef Name="MM01_WEBORGCODE" />
+            <PropertyRef Name="MM01_YEAR" />
+            <PropertyRef Name="MM01_APLTYPE" />
+            <PropertyRef Name="MM01_APLID" />
+            <PropertyRef Name="MM01_APLNO" />
+          </Key>
+          <Property Name="MM01_WEBORGCODE" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="MM01_YEAR" Type="char" MaxLength="3" Nullable="false" />
+          <Property Name="MM01_APLTYPE" Type="char" MaxLength="2" Nullable="false" />
+          <Property Name="MM01_APLID" Type="char" MaxLength="9" Nullable="false" />
+          <Property Name="MM01_APLNO" Type="char" MaxLength="14" Nullable="false" />
+          <Property Name="MM01_APLDATE" Type="int" />
+          <Property Name="MM01_APLTIME" Type="smallint" />
+          <Property Name="MM01_URGUID" Type="char" MaxLength="36" />
+          <Property Name="MM01_NAME" Type="nvarchar" MaxLength="20" />
+          <Property Name="MM01_DEPTCODE" Type="varchar" MaxLength="10" />
+          <Property Name="MM01_DEPTNAME" Type="nvarchar" MaxLength="50" />
+          <Property Name="MM01_TITLCODE" Type="varchar" MaxLength="10" />
+          <Property Name="MM01_TITLNAME" Type="nvarchar" MaxLength="20" />
+          <Property Name="MM01_CANLFLAG" Type="char" MaxLength="1" />
+          <Property Name="MM01_CLOSEDATE" Type="datetime" />
+          <Property Name="MM01_UPDDATE" Type="datetime" />
+          <Property Name="MM01_UPDUSER" Type="char" MaxLength="36" />
+        </EntityType>
+        <Association Name="FK_MSGD01_1_MD0102_2">
+          <End Role="MSGD01_1" Type="Self.MSGD01_1" Multiplicity="0..1" />
+          <End Role="MSGD01_2" Type="Self.MSGD01_2" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MSGD01_1">
+              <PropertyRef Name="MD0101_APLNO" />
+            </Principal>
+            <Dependent Role="MSGD01_2">
+              <PropertyRef Name="MD0102_APLNO" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MSGD01_2_MSGD01_2">
+          <End Role="MSGD01_2" Type="Self.MSGD01_2" Multiplicity="0..1" />
+          <End Role="MSGD01_21" Type="Self.MSGD01_2" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MSGD01_2">
+              <PropertyRef Name="MD0102_ID" />
+            </Principal>
+            <Dependent Role="MSGD01_21">
+              <PropertyRef Name="MD0102_SOURCEID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MSGD01_3_MSGD01_1">
+          <End Role="MSGD01_1" Type="Self.MSGD01_1" Multiplicity="0..1" />
+          <End Role="MSGD01_3" Type="Self.MSGD01_3" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MSGD01_1">
+              <PropertyRef Name="MD0101_APLNO" />
+            </Principal>
+            <Dependent Role="MSGD01_3">
+              <PropertyRef Name="MD0103_APLNO" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MSGD01_3_MSGD01_2">
+          <End Role="MSGD01_2" Type="Self.MSGD01_2" Multiplicity="0..1" />
+          <End Role="MSGD01_3" Type="Self.MSGD01_3" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MSGD01_2">
+              <PropertyRef Name="MD0102_ID" />
+            </Principal>
+            <Dependent Role="MSGD01_3">
+              <PropertyRef Name="MD0103_MD0102_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="twd_demoModelStoreContainer">
+          <EntitySet Name="MSGD01_1" EntityType="Self.MSGD01_1" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="MSGD01_2" EntityType="Self.MSGD01_2" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="MSGD01_3" EntityType="Self.MSGD01_3" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="MSGM01" EntityType="Self.MSGM01" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_MSGD01_1_MD0102_2" Association="Self.FK_MSGD01_1_MD0102_2">
+            <End Role="MSGD01_1" EntitySet="MSGD01_1" />
+            <End Role="MSGD01_2" EntitySet="MSGD01_2" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MSGD01_2_MSGD01_2" Association="Self.FK_MSGD01_2_MSGD01_2">
+            <End Role="MSGD01_2" EntitySet="MSGD01_2" />
+            <End Role="MSGD01_21" EntitySet="MSGD01_2" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MSGD01_3_MSGD01_1" Association="Self.FK_MSGD01_3_MSGD01_1">
+            <End Role="MSGD01_1" EntitySet="MSGD01_1" />
+            <End Role="MSGD01_3" EntitySet="MSGD01_3" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MSGD01_3_MSGD01_2" Association="Self.FK_MSGD01_3_MSGD01_2">
+            <End Role="MSGD01_2" EntitySet="MSGD01_2" />
+            <End Role="MSGD01_3" EntitySet="MSGD01_3" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="twd_demoModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="MSGD01_1">
+          <Key>
+            <PropertyRef Name="MD0101_APLNO" />
+          </Key>
+          <Property Name="MD0101_APLNO" Type="String" MaxLength="14" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="MD0101_TYPE" Type="String" MaxLength="2" FixedLength="true" Unicode="false" />
+          <Property Name="MD0101_SENDER" Type="String" MaxLength="36" FixedLength="true" Unicode="false" />
+          <Property Name="MD0101_SENDERNAME" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="MD0101_SENDERDEPT" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="MD0101_SENDERDEPTNAME" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="MD0101_SENDERTITLE" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="MD0101_SENDERTITLENAME" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="MD0101_SENDDATE" Type="DateTime" Precision="3" />
+          <Property Name="MD0101_ISSEND" Type="Boolean" />
+          <Property Name="MD0101_ALLMEMBER" Type="Boolean" />
+          <Property Name="MD0101_TITLE" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="MD0101_CONTENT" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="MD0101_LIMITBEGINDATE" Type="Int32" />
+          <Property Name="MD0101_LIMITENDDATE" Type="Int32" />
+          <Property Name="MD0101_UPDDATE" Type="DateTime" Precision="3" />
+          <Property Name="MD0101_UPDUSER" Type="String" MaxLength="36" FixedLength="true" Unicode="false" />
+          <NavigationProperty Name="MSGD01_2s" Relationship="Self.FK_MSGD01_1_MD0102_2" FromRole="MSGD01_1" ToRole="MSGD01_2" />
+          <NavigationProperty Name="MSGD01_3s" Relationship="Self.FK_MSGD01_3_MSGD01_1" FromRole="MSGD01_1" ToRole="MSGD01_3" />
+        </EntityType>
+        <EntityType Name="MSGD01_2">
+          <Key>
+            <PropertyRef Name="MD0102_ID" />
+          </Key>
+          <Property Name="MD0102_ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="MD0102_APLNO" Type="String" MaxLength="14" FixedLength="true" Unicode="false" />
+          <Property Name="MD0102_TYPE" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Name="MD0102_SOURCEID" Type="Int64" />
+          <Property Name="MD0102_SENDTYPE" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Name="MD0102_RECDEPT" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="MD0102_RECUSER" Type="String" MaxLength="36" FixedLength="true" Unicode="false" />
+          <Property Name="MD0102_UNDERTAKER" Type="String" MaxLength="36" FixedLength="true" Unicode="false" />
+          <Property Name="MD0102_UNDERTAKERNAME" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="MD0102_UNDERTAKERDEPT" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="MD0102_UNDERTAKERDEPTNAME" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="MD0102_UNDERTAKERTITLE" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="MD0102_UNDERTAKERTITLENAME" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="MD0102_READTYPE" Type="Boolean" />
+          <Property Name="MD0102_COMPLETETYPE" Type="Boolean" />
+          <Property Name="MD0102_COMPLETEDATE" Type="DateTime" Precision="3" />
+          <Property Name="MD0102_UPDDATE" Type="DateTime" Precision="3" />
+          <Property Name="MD0102_UPDUSER" Type="String" MaxLength="36" FixedLength="true" Unicode="false" />
+          <NavigationProperty Name="MSGD01_1" Relationship="Self.FK_MSGD01_1_MD0102_2" FromRole="MSGD01_2" ToRole="MSGD01_1" />
+          <NavigationProperty Name="MSGD01_21" Relationship="Self.FK_MSGD01_2_MSGD01_2" FromRole="MSGD01_2" ToRole="MSGD01_21" />
+          <NavigationProperty Name="MSGD01_22" Relationship="Self.FK_MSGD01_2_MSGD01_2" FromRole="MSGD01_21" ToRole="MSGD01_2" />
+          <NavigationProperty Name="MSGD01_3" Relationship="Self.FK_MSGD01_3_MSGD01_2" FromRole="MSGD01_2" ToRole="MSGD01_3" />
+        </EntityType>
+        <EntityType Name="MSGD01_3">
+          <Key>
+            <PropertyRef Name="MD0103_ID" />
+          </Key>
+          <Property Name="MD0103_ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="MD0103_MD0102_ID" Type="Int64" />
+          <Property Name="MD0103_APLNO" Type="String" MaxLength="14" FixedLength="true" Unicode="false" />
+          <Property Name="MD0103_TYPE" Type="String" MaxLength="2" FixedLength="true" Unicode="false" />
+          <Property Name="MD0103_REPLYDATE" Type="DateTime" Precision="3" />
+          <Property Name="MD0103_REPLY" Type="String" MaxLength="36" FixedLength="true" Unicode="false" />
+          <Property Name="MD0103_REPLYNAME" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="MD0103_REPLYDEPT" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="MD0103_REPLYDEPTNAME" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="MD0103_REPLYTITLE" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="MD0103_REPLYTITLENAME" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="MD0103_CONTENT" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="MD0103_UPDDATE" Type="DateTime" Precision="3" />
+          <Property Name="MD0103_UPDUSER" Type="String" MaxLength="36" FixedLength="true" Unicode="false" />
+          <NavigationProperty Name="MSGD01_1" Relationship="Self.FK_MSGD01_3_MSGD01_1" FromRole="MSGD01_3" ToRole="MSGD01_1" />
+          <NavigationProperty Name="MSGD01_2" Relationship="Self.FK_MSGD01_3_MSGD01_2" FromRole="MSGD01_3" ToRole="MSGD01_2" />
+        </EntityType>
+        <EntityType Name="MSGM01">
+          <Key>
+            <PropertyRef Name="MM01_WEBORGCODE" />
+            <PropertyRef Name="MM01_YEAR" />
+            <PropertyRef Name="MM01_APLTYPE" />
+            <PropertyRef Name="MM01_APLID" />
+            <PropertyRef Name="MM01_APLNO" />
+          </Key>
+          <Property Name="MM01_WEBORGCODE" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="MM01_YEAR" Type="String" MaxLength="3" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="MM01_APLTYPE" Type="String" MaxLength="2" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="MM01_APLID" Type="String" MaxLength="9" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="MM01_APLNO" Type="String" MaxLength="14" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="MM01_APLDATE" Type="Int32" />
+          <Property Name="MM01_APLTIME" Type="Int16" />
+          <Property Name="MM01_URGUID" Type="String" MaxLength="36" FixedLength="true" Unicode="false" />
+          <Property Name="MM01_NAME" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="MM01_DEPTCODE" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="MM01_DEPTNAME" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="MM01_TITLCODE" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="MM01_TITLNAME" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="MM01_CANLFLAG" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Name="MM01_CLOSEDATE" Type="DateTime" Precision="3" />
+          <Property Name="MM01_UPDDATE" Type="DateTime" Precision="3" />
+          <Property Name="MM01_UPDUSER" Type="String" MaxLength="36" FixedLength="true" Unicode="false" />
+        </EntityType>
+        <Association Name="FK_MSGD01_1_MD0102_2">
+          <End Role="MSGD01_1" Type="Self.MSGD01_1" Multiplicity="0..1" />
+          <End Role="MSGD01_2" Type="Self.MSGD01_2" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MSGD01_1">
+              <PropertyRef Name="MD0101_APLNO" />
+            </Principal>
+            <Dependent Role="MSGD01_2">
+              <PropertyRef Name="MD0102_APLNO" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MSGD01_3_MSGD01_1">
+          <End Role="MSGD01_1" Type="Self.MSGD01_1" Multiplicity="0..1" />
+          <End Role="MSGD01_3" Type="Self.MSGD01_3" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MSGD01_1">
+              <PropertyRef Name="MD0101_APLNO" />
+            </Principal>
+            <Dependent Role="MSGD01_3">
+              <PropertyRef Name="MD0103_APLNO" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MSGD01_2_MSGD01_2">
+          <End Role="MSGD01_2" Type="Self.MSGD01_2" Multiplicity="0..1" />
+          <End Role="MSGD01_21" Type="Self.MSGD01_2" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MSGD01_2">
+              <PropertyRef Name="MD0102_ID" />
+            </Principal>
+            <Dependent Role="MSGD01_21">
+              <PropertyRef Name="MD0102_SOURCEID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MSGD01_3_MSGD01_2">
+          <End Role="MSGD01_2" Type="Self.MSGD01_2" Multiplicity="0..1" />
+          <End Role="MSGD01_3" Type="Self.MSGD01_3" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MSGD01_2">
+              <PropertyRef Name="MD0102_ID" />
+            </Principal>
+            <Dependent Role="MSGD01_3">
+              <PropertyRef Name="MD0103_MD0102_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="twd_demoEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="MSGD01_1" EntityType="Self.MSGD01_1" />
+          <EntitySet Name="MSGD01_2" EntityType="Self.MSGD01_2" />
+          <EntitySet Name="MSGD01_3" EntityType="Self.MSGD01_3" />
+          <EntitySet Name="MSGM01" EntityType="Self.MSGM01" />
+          <AssociationSet Name="FK_MSGD01_1_MD0102_2" Association="Self.FK_MSGD01_1_MD0102_2">
+            <End Role="MSGD01_1" EntitySet="MSGD01_1" />
+            <End Role="MSGD01_2" EntitySet="MSGD01_2" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MSGD01_3_MSGD01_1" Association="Self.FK_MSGD01_3_MSGD01_1">
+            <End Role="MSGD01_1" EntitySet="MSGD01_1" />
+            <End Role="MSGD01_3" EntitySet="MSGD01_3" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MSGD01_2_MSGD01_2" Association="Self.FK_MSGD01_2_MSGD01_2">
+            <End Role="MSGD01_2" EntitySet="MSGD01_2" />
+            <End Role="MSGD01_21" EntitySet="MSGD01_2" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MSGD01_3_MSGD01_2" Association="Self.FK_MSGD01_3_MSGD01_2">
+            <End Role="MSGD01_2" EntitySet="MSGD01_2" />
+            <End Role="MSGD01_3" EntitySet="MSGD01_3" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="twd_demoModelStoreContainer" CdmEntityContainer="twd_demoEntities">
+          <EntitySetMapping Name="MSGD01_1">
+            <EntityTypeMapping TypeName="twd_demoModel.MSGD01_1">
+              <MappingFragment StoreEntitySet="MSGD01_1">
+                <ScalarProperty Name="MD0101_APLNO" ColumnName="MD0101_APLNO" />
+                <ScalarProperty Name="MD0101_TYPE" ColumnName="MD0101_TYPE" />
+                <ScalarProperty Name="MD0101_SENDER" ColumnName="MD0101_SENDER" />
+                <ScalarProperty Name="MD0101_SENDERNAME" ColumnName="MD0101_SENDERNAME" />
+                <ScalarProperty Name="MD0101_SENDERDEPT" ColumnName="MD0101_SENDERDEPT" />
+                <ScalarProperty Name="MD0101_SENDERDEPTNAME" ColumnName="MD0101_SENDERDEPTNAME" />
+                <ScalarProperty Name="MD0101_SENDERTITLE" ColumnName="MD0101_SENDERTITLE" />
+                <ScalarProperty Name="MD0101_SENDERTITLENAME" ColumnName="MD0101_SENDERTITLENAME" />
+                <ScalarProperty Name="MD0101_SENDDATE" ColumnName="MD0101_SENDDATE" />
+                <ScalarProperty Name="MD0101_ISSEND" ColumnName="MD0101_ISSEND" />
+                <ScalarProperty Name="MD0101_ALLMEMBER" ColumnName="MD0101_ALLMEMBER" />
+                <ScalarProperty Name="MD0101_TITLE" ColumnName="MD0101_TITLE" />
+                <ScalarProperty Name="MD0101_CONTENT" ColumnName="MD0101_CONTENT" />
+                <ScalarProperty Name="MD0101_LIMITBEGINDATE" ColumnName="MD0101_LIMITBEGINDATE" />
+                <ScalarProperty Name="MD0101_LIMITENDDATE" ColumnName="MD0101_LIMITENDDATE" />
+                <ScalarProperty Name="MD0101_UPDDATE" ColumnName="MD0101_UPDDATE" />
+                <ScalarProperty Name="MD0101_UPDUSER" ColumnName="MD0101_UPDUSER" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MSGD01_2">
+            <EntityTypeMapping TypeName="twd_demoModel.MSGD01_2">
+              <MappingFragment StoreEntitySet="MSGD01_2">
+                <ScalarProperty Name="MD0102_ID" ColumnName="MD0102_ID" />
+                <ScalarProperty Name="MD0102_APLNO" ColumnName="MD0102_APLNO" />
+                <ScalarProperty Name="MD0102_TYPE" ColumnName="MD0102_TYPE" />
+                <ScalarProperty Name="MD0102_SOURCEID" ColumnName="MD0102_SOURCEID" />
+                <ScalarProperty Name="MD0102_SENDTYPE" ColumnName="MD0102_SENDTYPE" />
+                <ScalarProperty Name="MD0102_RECDEPT" ColumnName="MD0102_RECDEPT" />
+                <ScalarProperty Name="MD0102_RECUSER" ColumnName="MD0102_RECUSER" />
+                <ScalarProperty Name="MD0102_UNDERTAKER" ColumnName="MD0102_UNDERTAKER" />
+                <ScalarProperty Name="MD0102_UNDERTAKERNAME" ColumnName="MD0102_UNDERTAKERNAME" />
+                <ScalarProperty Name="MD0102_UNDERTAKERDEPT" ColumnName="MD0102_UNDERTAKERDEPT" />
+                <ScalarProperty Name="MD0102_UNDERTAKERDEPTNAME" ColumnName="MD0102_UNDERTAKERDEPTNAME" />
+                <ScalarProperty Name="MD0102_UNDERTAKERTITLE" ColumnName="MD0102_UNDERTAKERTITLE" />
+                <ScalarProperty Name="MD0102_UNDERTAKERTITLENAME" ColumnName="MD0102_UNDERTAKERTITLENAME" />
+                <ScalarProperty Name="MD0102_READTYPE" ColumnName="MD0102_READTYPE" />
+                <ScalarProperty Name="MD0102_COMPLETETYPE" ColumnName="MD0102_COMPLETETYPE" />
+                <ScalarProperty Name="MD0102_COMPLETEDATE" ColumnName="MD0102_COMPLETEDATE" />
+                <ScalarProperty Name="MD0102_UPDDATE" ColumnName="MD0102_UPDDATE" />
+                <ScalarProperty Name="MD0102_UPDUSER" ColumnName="MD0102_UPDUSER" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MSGD01_3">
+            <EntityTypeMapping TypeName="twd_demoModel.MSGD01_3">
+              <MappingFragment StoreEntitySet="MSGD01_3">
+                <ScalarProperty Name="MD0103_ID" ColumnName="MD0103_ID" />
+                <ScalarProperty Name="MD0103_MD0102_ID" ColumnName="MD0103_MD0102_ID" />
+                <ScalarProperty Name="MD0103_APLNO" ColumnName="MD0103_APLNO" />
+                <ScalarProperty Name="MD0103_TYPE" ColumnName="MD0103_TYPE" />
+                <ScalarProperty Name="MD0103_REPLYDATE" ColumnName="MD0103_REPLYDATE" />
+                <ScalarProperty Name="MD0103_REPLY" ColumnName="MD0103_REPLY" />
+                <ScalarProperty Name="MD0103_REPLYNAME" ColumnName="MD0103_REPLYNAME" />
+                <ScalarProperty Name="MD0103_REPLYDEPT" ColumnName="MD0103_REPLYDEPT" />
+                <ScalarProperty Name="MD0103_REPLYDEPTNAME" ColumnName="MD0103_REPLYDEPTNAME" />
+                <ScalarProperty Name="MD0103_REPLYTITLE" ColumnName="MD0103_REPLYTITLE" />
+                <ScalarProperty Name="MD0103_REPLYTITLENAME" ColumnName="MD0103_REPLYTITLENAME" />
+                <ScalarProperty Name="MD0103_CONTENT" ColumnName="MD0103_CONTENT" />
+                <ScalarProperty Name="MD0103_UPDDATE" ColumnName="MD0103_UPDDATE" />
+                <ScalarProperty Name="MD0103_UPDUSER" ColumnName="MD0103_UPDUSER" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MSGM01">
+            <EntityTypeMapping TypeName="twd_demoModel.MSGM01">
+              <MappingFragment StoreEntitySet="MSGM01">
+                <ScalarProperty Name="MM01_WEBORGCODE" ColumnName="MM01_WEBORGCODE" />
+                <ScalarProperty Name="MM01_YEAR" ColumnName="MM01_YEAR" />
+                <ScalarProperty Name="MM01_APLTYPE" ColumnName="MM01_APLTYPE" />
+                <ScalarProperty Name="MM01_APLID" ColumnName="MM01_APLID" />
+                <ScalarProperty Name="MM01_APLNO" ColumnName="MM01_APLNO" />
+                <ScalarProperty Name="MM01_APLDATE" ColumnName="MM01_APLDATE" />
+                <ScalarProperty Name="MM01_APLTIME" ColumnName="MM01_APLTIME" />
+                <ScalarProperty Name="MM01_URGUID" ColumnName="MM01_URGUID" />
+                <ScalarProperty Name="MM01_NAME" ColumnName="MM01_NAME" />
+                <ScalarProperty Name="MM01_DEPTCODE" ColumnName="MM01_DEPTCODE" />
+                <ScalarProperty Name="MM01_DEPTNAME" ColumnName="MM01_DEPTNAME" />
+                <ScalarProperty Name="MM01_TITLCODE" ColumnName="MM01_TITLCODE" />
+                <ScalarProperty Name="MM01_TITLNAME" ColumnName="MM01_TITLNAME" />
+                <ScalarProperty Name="MM01_CANLFLAG" ColumnName="MM01_CANLFLAG" />
+                <ScalarProperty Name="MM01_CLOSEDATE" ColumnName="MM01_CLOSEDATE" />
+                <ScalarProperty Name="MM01_UPDDATE" ColumnName="MM01_UPDDATE" />
+                <ScalarProperty Name="MM01_UPDUSER" ColumnName="MM01_UPDUSER" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="無" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
