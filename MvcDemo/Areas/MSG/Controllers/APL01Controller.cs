@@ -76,7 +76,13 @@ namespace MvcDemo.Areas.MSG.Controllers
             //Update Db
             try
             {
-                var dbModel = sqlDb.MSGD01_1.FirstOrDefault(m => m.MD0101_APLNO == aplno);
+                //var dbModel = sqlDb.MSGD01_1.FirstOrDefault(m => m.MD0101_APLNO == aplno);
+                var dbModel = new MSGD01_1
+                {
+                    MD0101_APLNO = aplno
+                };
+
+                //sqlDb.MSGD01_1.Attach(dbModel);
 
                 sqlDb.MSGD01_1.Remove(dbModel);
                 sqlDb.SaveChanges();
