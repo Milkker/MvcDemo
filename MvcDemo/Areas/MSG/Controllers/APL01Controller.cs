@@ -82,9 +82,9 @@ namespace MvcDemo.Areas.MSG.Controllers
                     MD0101_APLNO = aplno
                 };
 
-                //sqlDb.MSGD01_1.Attach(dbModel);
-
+                sqlDb.MSGD01_1.Attach(dbModel);
                 sqlDb.MSGD01_1.Remove(dbModel);
+
                 sqlDb.SaveChanges();
 
                 return Json(new
@@ -198,6 +198,42 @@ namespace MvcDemo.Areas.MSG.Controllers
                 return View(model);
             }
 
+        }
+
+        public void GroupBy()
+        {
+            var group = from d02 in sqlDb.MSGD01_2
+                        group d02 by new { Aplno = d02.MD0102_APLNO, D02Type = d02.MD0102_TYPE } into g
+                        let test = g.Sum(m => m.MD0102_ID)
+                        orderby g.Key.Aplno, g.Key.D02Type
+                        //let first = g.OrderBy(m => m.MD0102_ID).FirstOrDefault()
+                        select new
+                        {
+                            Aplno = g.Key.Aplno,
+                            D02Type = g.Key.D02Type,
+                            Count = g.Count(),
+                            Data = g.Select(m => new { User = m.MD0102_UNDERTAKERNAME, Test = m.MD0102_SENDTYPE })
+                        };
+
+            var list = sqlDb.MSGD01_1
+                .Select(m => new  {
+                    m.MD0101_APLNO,
+                    m.MD0101_SENDERNAME
+                })
+                .ToList();
+
+            foreach (var m in list)
+            {
+                if (m.MD0101_SENDERNAME != "李嘉杰")
+                    continue;
+
+                var dbModel = new MSGD01_1 { MD0101_APLNO = m.MD0101_APLNO };
+
+                sqlDb.MSGD01_1.Attach(dbModel);
+
+                dbModel.MD0101_CONTENT = "AAA";
+                sqlDb.SaveChanges();
+            }
         }
     }
 }
