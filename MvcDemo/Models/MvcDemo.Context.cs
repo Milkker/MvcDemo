@@ -29,5 +29,8 @@ namespace MvcDemo.Models
         public virtual DbSet<MSGD01_2> MSGD01_2 { get; set; }
         public virtual DbSet<MSGD01_3> MSGD01_3 { get; set; }
         public virtual DbSet<MSGM01> MSGM01 { get; set; }
+        public virtual DbSet<Course> Course { get; set; }
+        public virtual DbSet<Student> Student { get; set; }
+        public virtual DbSet<Teacher> Teacher { get; set; }
     }
 }

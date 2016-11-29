@@ -1,0 +1,39 @@
+﻿@using MvcDemo.Areas.MSG.Models
+@model MessageMasterVM
+
+<div class="row">
+    <div class="col-md-12">
+        @using (Html.BeginForm("Detail", "APL01", FormMethod.Post, new { @class = "form-horizontal" }))
+        {
+            @Html.HiddenFor(m => m.Aplno)
+            @Html.AntiForgeryToken()
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            <div class="form-group">
+                @Html.LabelFor(m => m.SenderName, new { @class = "col-md-2 control-label" })
+                <div class="col-md-10">
+                    @Html.TextBoxFor(m => m.SenderName, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.SenderName, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(m => m.Title, new { @class = "col-md-2 control-label" })
+                <div class="col-md-10">
+                    @Html.TextBoxFor(m => m.Title, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.Title, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(m => m.IsAllMember, new { @class = "col-md-2 control-label" })
+                <div class="col-md-10">
+                    <label>@Html.CheckBoxFor(m => m.IsAllMember) 全體人員</label>
+                    @Html.ValidationMessageFor(m => m.IsAllMember, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" value="修改資料" class="btn btn-default" />
+                </div>
+            </div>
+        }
+    </div>
+</div>

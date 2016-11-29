@@ -200,6 +200,26 @@ namespace MvcDemo.Areas.MSG.Controllers
 
         }
 
+        public ActionResult _Detail(string aplno)
+        {
+            var query = sqlDb.MSGD01_1.Where(m => m.MD0101_APLNO == aplno);
+
+            if (!query.Any())
+                return HttpNotFound();
+
+            var firstData = query.FirstOrDefault();
+
+            //DB to ViewModel
+            MessageMasterVM model = new MessageMasterVM();
+
+            model.Aplno = firstData.MD0101_APLNO;
+            model.SenderName = firstData.MD0101_SENDERNAME;
+            model.Title = firstData.MD0101_TITLE;
+            model.IsAllMember = firstData.MD0101_ALLMEMBER ?? false;
+
+            return PartialView(model);
+        }
+
         public void GroupBy()
         {
             var group = from d02 in sqlDb.MSGD01_2
@@ -214,7 +234,7 @@ namespace MvcDemo.Areas.MSG.Controllers
                             Count = g.Count(),
                             Data = g.Select(m => new { User = m.MD0102_UNDERTAKERNAME, Test = m.MD0102_SENDTYPE })
                         };
-
+            //select MD0101_APLNO, MD0101_SENDERNAME from MSGD01_1
             var list = sqlDb.MSGD01_1
                 .Select(m => new  {
                     m.MD0101_APLNO,

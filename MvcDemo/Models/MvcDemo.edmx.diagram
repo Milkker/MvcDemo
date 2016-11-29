@@ -4,7 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="ca78732d403944aeaf848bbba7cff6d7" Name="Diagram1" ZoomLevel="72">
+      <Diagram DiagramId="ca78732d403944aeaf848bbba7cff6d7" Name="MSG" ZoomLevel="72">
         <EntityTypeShape EntityType="twd_demoModel.MSGD01_1" Width="1.5" PointX="0.75" PointY="1.375" IsExpanded="true" />
         <EntityTypeShape EntityType="twd_demoModel.MSGD01_2" Width="1.5" PointX="3" PointY="1.125" IsExpanded="true" />
         <EntityTypeShape EntityType="twd_demoModel.MSGD01_3" Width="1.5" PointX="5.25" PointY="1.625" IsExpanded="true" />
@@ -13,6 +13,12 @@
         <AssociationConnector Association="twd_demoModel.FK_MSGD01_3_MSGD01_1" ManuallyRouted="false" />
         <AssociationConnector Association="twd_demoModel.FK_MSGD01_2_MSGD01_2" ManuallyRouted="false" />
         <AssociationConnector Association="twd_demoModel.FK_MSGD01_3_MSGD01_2" ManuallyRouted="false" />
+      </Diagram>
+      <Diagram DiagramId="8bc3f90ffdec47a9b4d5d56b23367b1e" Name="Practice" >
+        <EntityTypeShape EntityType="twd_demoModel.Course" Width="1.5" PointX="0.75" PointY="0.875" />
+        <EntityTypeShape EntityType="twd_demoModel.Student" Width="1.5" PointX="3" PointY="1.25" />
+        <EntityTypeShape EntityType="twd_demoModel.Teacher" Width="1.5" PointX="0.75" PointY="3.75" />
+        <AssociationConnector Association="twd_demoModel.CourseStudent" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

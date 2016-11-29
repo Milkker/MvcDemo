@@ -8,6 +8,15 @@
     </style>
 }
 <a href="@Url.Action("Insert")">新增</a>
+@if (Model != null && Model.Any())
+{
+    <h3>預覽第一筆資料</h3>
+    @*不透過Controller 直接傳遞View Model物件呈現PartialView。
+    @Html.Partial("_Detail", Model.FirstOrDefault())
+    *@
+    @*透過Controller，依照route value執行Controller指定的Action呈現PartialView。*@
+    @Html.Action("_Detail", new { aplno = Model.FirstOrDefault().Aplno})
+}
 <table>
     <thead>
         <tr>

@@ -4,7 +4,25 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="twd_demoModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="twd_demoModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Course">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="char" MaxLength="10" Nullable="false" />
+          <Property Name="name" Type="nvarchar" MaxLength="50" />
+          <Property Name="teacher" Type="char" MaxLength="10" />
+          <Property Name="teachername" Type="nvarchar" MaxLength="50" />
+          <Property Name="hours" Type="int" />
+        </EntityType>
+        <EntityType Name="CourseStudent">
+          <Key>
+            <PropertyRef Name="courseid" />
+            <PropertyRef Name="studentid" />
+          </Key>
+          <Property Name="courseid" Type="char" MaxLength="10" Nullable="false" />
+          <Property Name="studentid" Type="char" MaxLength="10" Nullable="false" />
+        </EntityType>
         <EntityType Name="MSGD01_1">
           <Key>
             <PropertyRef Name="MD0101_APLNO" />
@@ -95,6 +113,44 @@
           <Property Name="MM01_UPDDATE" Type="datetime" />
           <Property Name="MM01_UPDUSER" Type="char" MaxLength="36" />
         </EntityType>
+        <EntityType Name="Student">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="char" MaxLength="10" Nullable="false" />
+          <Property Name="name" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Teacher">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="char" MaxLength="10" Nullable="false" />
+          <Property Name="name" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <Association Name="FK__CourseStu__cours__7121B3AD">
+          <End Role="Course" Type="Self.Course" Multiplicity="1" />
+          <End Role="CourseStudent" Type="Self.CourseStudent" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Course">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="CourseStudent">
+              <PropertyRef Name="courseid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__CourseStu__stude__7215D7E6">
+          <End Role="Student" Type="Self.Student" Multiplicity="1" />
+          <End Role="CourseStudent" Type="Self.CourseStudent" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Student">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="CourseStudent">
+              <PropertyRef Name="studentid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_MSGD01_1_MD0102_2">
           <End Role="MSGD01_1" Type="Self.MSGD01_1" Multiplicity="0..1" />
           <End Role="MSGD01_2" Type="Self.MSGD01_2" Multiplicity="*" />
@@ -144,10 +200,22 @@
           </ReferentialConstraint>
         </Association>
         <EntityContainer Name="twd_demoModelStoreContainer">
+          <EntitySet Name="Course" EntityType="Self.Course" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CourseStudent" EntityType="Self.CourseStudent" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="MSGD01_1" EntityType="Self.MSGD01_1" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="MSGD01_2" EntityType="Self.MSGD01_2" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="MSGD01_3" EntityType="Self.MSGD01_3" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="MSGM01" EntityType="Self.MSGM01" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Student" EntityType="Self.Student" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Teacher" EntityType="Self.Teacher" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__CourseStu__cours__7121B3AD" Association="Self.FK__CourseStu__cours__7121B3AD">
+            <End Role="Course" EntitySet="Course" />
+            <End Role="CourseStudent" EntitySet="CourseStudent" />
+          </AssociationSet>
+          <AssociationSet Name="FK__CourseStu__stude__7215D7E6" Association="Self.FK__CourseStu__stude__7215D7E6">
+            <End Role="Student" EntitySet="Student" />
+            <End Role="CourseStudent" EntitySet="CourseStudent" />
+          </AssociationSet>
           <AssociationSet Name="FK_MSGD01_1_MD0102_2" Association="Self.FK_MSGD01_1_MD0102_2">
             <End Role="MSGD01_1" EntitySet="MSGD01_1" />
             <End Role="MSGD01_2" EntitySet="MSGD01_2" />
@@ -165,8 +233,7 @@
             <End Role="MSGD01_3" EntitySet="MSGD01_3" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="twd_demoModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -337,7 +404,44 @@
             <End Role="MSGD01_2" EntitySet="MSGD01_2" />
             <End Role="MSGD01_3" EntitySet="MSGD01_3" />
           </AssociationSet>
+          <EntitySet Name="Course" EntityType="twd_demoModel.Course" />
+          <EntitySet Name="Student" EntityType="twd_demoModel.Student" />
+          <EntitySet Name="Teacher" EntityType="twd_demoModel.Teacher" />
+          <AssociationSet Name="CourseStudent" Association="twd_demoModel.CourseStudent">
+            <End Role="Course" EntitySet="Course" />
+            <End Role="Student" EntitySet="Student" />
+          </AssociationSet>
         </EntityContainer>
+        <EntityType Name="Course">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="String" Nullable="false" MaxLength="10" FixedLength="true" Unicode="false" />
+          <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="teacher" Type="String" MaxLength="10" FixedLength="true" Unicode="false" />
+          <Property Name="teachername" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="hours" Type="Int32" />
+          <NavigationProperty Name="Student" Relationship="twd_demoModel.CourseStudent" FromRole="Course" ToRole="Student" />
+        </EntityType>
+        <EntityType Name="Student">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="String" Nullable="false" MaxLength="10" FixedLength="true" Unicode="false" />
+          <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Course" Relationship="twd_demoModel.CourseStudent" FromRole="Student" ToRole="Course" />
+        </EntityType>
+        <EntityType Name="Teacher">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="String" Nullable="false" MaxLength="10" FixedLength="true" Unicode="false" />
+          <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <Association Name="CourseStudent">
+          <End Type="twd_demoModel.Course" Role="Course" Multiplicity="*" />
+          <End Type="twd_demoModel.Student" Role="Student" Multiplicity="*" />
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -434,6 +538,41 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="Course">
+            <EntityTypeMapping TypeName="twd_demoModel.Course">
+              <MappingFragment StoreEntitySet="Course">
+                <ScalarProperty Name="hours" ColumnName="hours" />
+                <ScalarProperty Name="teachername" ColumnName="teachername" />
+                <ScalarProperty Name="teacher" ColumnName="teacher" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Student">
+            <EntityTypeMapping TypeName="twd_demoModel.Student">
+              <MappingFragment StoreEntitySet="Student">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Teacher">
+            <EntityTypeMapping TypeName="twd_demoModel.Teacher">
+              <MappingFragment StoreEntitySet="Teacher">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <AssociationSetMapping Name="CourseStudent" TypeName="twd_demoModel.CourseStudent" StoreEntitySet="CourseStudent">
+            <EndProperty Name="Student">
+              <ScalarProperty Name="id" ColumnName="studentid" />
+            </EndProperty>
+            <EndProperty Name="Course">
+              <ScalarProperty Name="id" ColumnName="courseid" />
+            </EndProperty>
+          </AssociationSetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
