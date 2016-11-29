@@ -1,0 +1,66 @@
+﻿@model IEnumerable<CourseVM>
+@section heads{
+    <style>
+        .deleteLink {
+            color: red;
+        }
+    </style>
+}
+<a href="@Url.Action("Insert")">新增</a>
+@if (Model != null && Model.Any())
+{
+    <h3>預覽第一筆資料</h3>
+    @*不透過Controller 直接傳遞View Model物件呈現PartialView。
+        @Html.Partial("_Detail", Model.FirstOrDefault())
+    *@
+    @*透過Controller，依照route value執行Controller指定的Action呈現PartialView。*@
+    @*@Html.Action("_Detail", new { aplno = Model.FirstOrDefault().CurseId })*@
+}
+<table>
+    <thead>
+        <tr>
+            <th>@Html.DisplayNameFor(m => m.FirstOrDefault().CurseId)</th>
+            <th>@Html.DisplayNameFor(m => m.FirstOrDefault().Name)</th>
+            <th>@Html.DisplayNameFor(m => m.FirstOrDefault().TeacherName)</th>
+            <th>@Html.DisplayNameFor(m => m.FirstOrDefault().Hours)</th>
+            <th>修課人數</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (Model != null && Model.Any())
+        {
+            foreach (var messageMaster in Model)
+            {
+                <tr>
+                    <td>
+                        <a href="@Url.Action("Detail", new { aplno = messageMaster.CurseId })">@messageMaster.CurseId</a>
+                    </td>
+                    <td>@messageMaster.Name</td>
+                    <td>@messageMaster.TeacherName</td>
+                    <td>@messageMaster.Hours</td>
+                    <td>@messageMaster.Students.Count()</td>
+                    <td>
+                        <a href="#" class="deleteLink" data-aplno="@messageMaster.CurseId">刪除鈕</a>
+                    </td>
+                </tr>
+            }
+        }
+    </tbody>
+</table>
+@section scripts{
+    <script>
+        $(function () {
+            $(".deleteLink").click(function () {
+                var aplno = $(this).data("aplno");
+                $.post("@Url.Action("Delete")", {
+                    CurseId: CurseId
+                }, function (data) {
+                    if (data.Success)
+                        location.reload();
+                    alert(data.Message);
+                });
+            });
+        });
+    </script>
+}

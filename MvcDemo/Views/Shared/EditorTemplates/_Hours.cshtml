@@ -1,0 +1,10 @@
+﻿@model int
+@{
+    List<SelectListItem> items = new List<SelectListItem>();
+    
+    for (int i = 1; i <= 24; i++)
+	{
+	    items.Add(new SelectListItem{Text = i.ToString(), Value = i.ToString()});
+	}
+}
+@Html.DropDownListFor(m => m, items, "請選擇小時") 小時
